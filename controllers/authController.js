@@ -65,6 +65,7 @@ const registerUser = async (req, res, next) => {
         universities: [],
         userId: createdUser.id,
       });
+      await student.save({ session });
       const token = jwt.sign(
         { id: createdUser.id, email, role: "student" },
         jwtkey

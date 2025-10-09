@@ -9,7 +9,8 @@ const errorHandler = require("./controllers/errorController");
 
 const app = express();
 
-const connectionString = "mongodb://localhost:27017/gc";
+const connectionString =
+  "mongodb+srv://paramayu:HRE8x52nfRRQr1gC@test.3uflnaa.mongodb.net/gc?retryWrites=true&w=majority&appName=TEST";
 mongooseConnect(connectionString);
 
 // Middleware to parse JSON
