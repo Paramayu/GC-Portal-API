@@ -142,6 +142,12 @@ const sendOTP = async (req, res) => {
       return res.status(499).json({ errors });
     }
   }
+  const existingUser = await User.findOne({ email });
+  if (!existingUser) {
+    return res
+      .status(409)
+      .json({ message: "User with given email already exist." });
+  }
   const otp = crypto.randomInt(100000, 999999).toString();
   const ttl = 10 * 60; // 10 minutes in seconds
 

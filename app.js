@@ -9,8 +9,7 @@ const errorHandler = require("./controllers/errorController");
 
 const app = express();
 
-const connectionString =
-  "mongodb+srv://paramayu:HRE8x52nfRRQr1gC@test.3uflnaa.mongodb.net/gc?retryWrites=true&w=majority&appName=TEST";
+const connectionString = process.env.MONGODB_CONNECTIONSTRING;
 mongooseConnect(connectionString);
 
 // Middleware to parse JSON
@@ -23,6 +22,14 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use("/api", indexRoutes);
+
+app.get("/ping", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "Server is running",
+    timestamp: new Date(),
+  });
+});
 
 //Global Error Handeler Triggered when an argument is passed to the next() function
 app.use(errorHandler);
