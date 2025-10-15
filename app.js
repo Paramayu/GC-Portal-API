@@ -13,13 +13,14 @@ const connectionString = process.env.MONGODB_CONNECTIONSTRING;
 mongooseConnect(connectionString);
 
 // Middleware to parse JSON
-app.use(express.json());
-app.use(cookieParser());
 app.use(
   cors({
     origin: "*",
+    credentials: true,
   })
 );
+app.use(express.json());
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use("/api", indexRoutes);
 
